@@ -9,3 +9,4 @@ Technologies used:
 - Spring Data JPA
 - MySql 5.7 (Using Mysql:5.7 official image from docker hub)
 - Flyway (migrations manager)
+- Lombok
