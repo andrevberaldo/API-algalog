@@ -1,7 +1,8 @@
 package com.algaworks.algalog.api.controller;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +43,12 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Customer createCustomer(@RequestBody Customer customer){
+	public Customer createCustomer(@Valid @RequestBody Customer customer){
 		return customerRepository.save(customer);
 	}
 	
 	@PutMapping("/{customerId}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable Long customerId, @RequestBody Customer updatedCustomer) {
+	public ResponseEntity<Customer> updateCustomer(@PathVariable Long customerId,@Valid @RequestBody Customer updatedCustomer) {
 		if(!customerRepository.existsById(customerId)) {
 			return ResponseEntity.notFound().build();
 		}
