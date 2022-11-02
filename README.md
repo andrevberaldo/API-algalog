@@ -5,7 +5,7 @@ Main features: Back-end for a logistic system, implementing the best pratices of
 
 Technologies used:
 
-Spring Web
-Spring Data JPA
-MySql 5.7
-Flyway (migrations manager)
+- Spring Web
+- Spring Data JPA
+- MySql 5.7 (Using Mysql:5.7 official image from docker hub)
+- Flyway (migrations manager)
