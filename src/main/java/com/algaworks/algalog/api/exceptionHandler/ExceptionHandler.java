@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.algaworks.algalog.domain.exception.BusinessException;
+
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		
@@ -38,5 +40,18 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		error.setFields(fields);
 		
 		return handleExceptionInternal(ex, error, headers, status, request);
+	}
+	
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(BusinessException.class)
+	public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		AlgalogException error = new AlgalogException();
+		error.setStatus(status.value());
+		error.setDatetime(LocalDateTime.now());
+		error.setTitle(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
 	}
 }

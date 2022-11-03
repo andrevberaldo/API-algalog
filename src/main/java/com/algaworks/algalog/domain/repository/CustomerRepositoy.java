@@ -1,6 +1,7 @@
 package com.algaworks.algalog.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,6 @@ public interface CustomerRepositoy extends JpaRepository<Customer, Long>{
 	
 	// When use "Containing" on the method name, SDJPA use 'like' on the sql.
 	List<Customer> findByNameContaining(String name);
+	
+	Optional<Customer> findByEmail(String email);
 }

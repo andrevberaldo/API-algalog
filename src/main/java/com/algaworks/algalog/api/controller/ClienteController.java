@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.domain.model.Customer;
 import com.algaworks.algalog.domain.repository.CustomerRepositoy;
+import com.algaworks.algalog.domain.service.CustomerService;
 
 import lombok.AllArgsConstructor;
 
@@ -26,17 +27,18 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/customers")
 public class ClienteController {
 	
-	CustomerRepositoy customerRepository;
+	private CustomerRepositoy repository;
+	private CustomerService service;
 	
 	@GetMapping
 	public List<Customer> list() {
-		return customerRepository.findAll();
+		return repository.findAll();
 	}
 	
 	@GetMapping("/{customerId}")
 	public ResponseEntity<Customer> getCustomer(@PathVariable Long customerId) {
 		
-		return customerRepository.findById(customerId)
+		return repository.findById(customerId)
 				.map(ResponseEntity::ok) // method reference passing each customer on the lambda (customer -> ResponseEntity.ok(customer))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -44,28 +46,28 @@ public class ClienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Customer createCustomer(@Valid @RequestBody Customer customer){
-		return customerRepository.save(customer);
+		return service.saveCustomer(customer);
 	}
 	
 	@PutMapping("/{customerId}")
 	public ResponseEntity<Customer> updateCustomer(@PathVariable Long customerId,@Valid @RequestBody Customer updatedCustomer) {
-		if(!customerRepository.existsById(customerId)) {
+		if(!repository.existsById(customerId)) {
 			return ResponseEntity.notFound().build();
 		}
 		
 		updatedCustomer.setId(customerId);
-		updatedCustomer = customerRepository.save(updatedCustomer);
+		updatedCustomer = service.saveCustomer(updatedCustomer);
 		
 		return ResponseEntity.ok(updatedCustomer);
 	}
 	
 	@DeleteMapping("/{customerId}")
 	public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId){
-		if(!customerRepository.existsById(customerId)) {
+		if(!repository.existsById(customerId)) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		customerRepository.deleteById(customerId);
+		service.deleteCustomerById(customerId);
 		return ResponseEntity.noContent().build();
 	}
 	
