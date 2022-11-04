@@ -14,7 +14,7 @@ public class Recipient {
 	@Column(name = "recipient_name")
 	private String name;
 	
-	@Column(name = "recipient_adress")
+	@Column(name = "recipient_address")
 	private String address;
 	
 	@Column(name = "recipient_number")
