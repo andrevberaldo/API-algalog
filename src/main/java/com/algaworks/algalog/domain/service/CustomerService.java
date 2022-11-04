@@ -35,5 +35,10 @@ public class CustomerService {
 		repository.deleteById(customerId);
 	}
 	
+	public Customer findCustomer(Long customerId) {
+		return repository.findById(customerId)
+				.orElseThrow(() -> new BusinessException("Invalid Customer"));
+	}
+	
 	 
 }
