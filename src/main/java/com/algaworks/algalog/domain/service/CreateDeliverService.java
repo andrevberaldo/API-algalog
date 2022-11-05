@@ -1,6 +1,6 @@
 package com.algaworks.algalog.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.transaction.Transactional;
 
@@ -27,7 +27,7 @@ public class CreateDeliverService {
 
 		deliver.setCustomer(customer);
 		deliver.setStatus(DeliverStatus.PENDING);
-		deliver.setCreatedAt(LocalDateTime.now());
+		deliver.setCreatedAt(OffsetDateTime.now());
 		
 		
 		return deliverRepository.save(deliver);

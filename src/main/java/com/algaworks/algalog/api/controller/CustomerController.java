@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor //Instead of use @Autowired on CustomerRepository this constructor will turn us able to ease testing the code using dependency injection 
 @RestController
 @RequestMapping("/customers")
-public class ClienteController {
+public class CustomerController {
 	
 	private CustomerRepositoy repository;
 	private CustomerService service;
