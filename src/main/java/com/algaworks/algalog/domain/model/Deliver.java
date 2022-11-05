@@ -12,12 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.groups.ConvertGroup;
-import javax.validation.groups.Default;
 
-import com.algaworks.algalog.domain.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,23 +34,17 @@ public class Deliver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ConvertGroup(from = Default.class, to = ValidationGroups.CustomerId.class)	
-	@Valid
-	@NotNull
 	@ManyToOne
 	private Customer customer;
 	
 	@Embedded
 	private Recipient recipient;
 	
-	@NotNull
 	private BigDecimal fee;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private DeliverStatus status;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	@Column(name = "created_at")
 	private OffsetDateTime createdAt;
 	

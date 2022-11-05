@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.api.assembler.DeliverDTOAssembler;
 import com.algaworks.algalog.api.model.DeliverDTO;
-import com.algaworks.algalog.domain.model.Deliver;
+import com.algaworks.algalog.api.model.input.DeliverInputDTO;
 import com.algaworks.algalog.domain.repository.DeliverRepository;
 import com.algaworks.algalog.domain.service.CreateDeliverService;
 
@@ -47,7 +47,9 @@ public class DeliverController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public DeliverDTO create(@Valid @RequestBody Deliver deliver) {
-		return deliverAssembler.toDTO(createDeliver.createDemand(deliver));
+	public DeliverDTO create(@Valid @RequestBody DeliverInputDTO deliver) {
+		var deliverEntity = deliverAssembler.toEntity(deliver);
+		var dcliverCreated = createDeliver.createDemand(deliverEntity);
+		return deliverAssembler.toDTO(dcliverCreated);
 	}
 }

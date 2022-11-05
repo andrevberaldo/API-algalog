@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.algaworks.algalog.api.model.DeliverDTO;
+import com.algaworks.algalog.api.model.input.DeliverInputDTO;
 import com.algaworks.algalog.domain.model.Deliver;
 
 import lombok.AllArgsConstructor;
@@ -25,5 +26,9 @@ public class DeliverDTOAssembler {
 		List<DeliverDTO> deliveriesList = new ArrayList<>();
 		deliveries.forEach(deliver -> deliveriesList.add(toDTO(deliver)));
 		return deliveriesList;
+	}
+	
+	public Deliver toEntity(DeliverInputDTO dto) {
+		return modelMapper.map(dto, Deliver.class);
 	}
 }
