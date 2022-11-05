@@ -6,16 +6,16 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algalog.api.assembler.DeliverDTOAssembler;
+import com.algaworks.algalog.api.model.DeliverDTO;
 import com.algaworks.algalog.domain.model.Deliver;
 import com.algaworks.algalog.domain.repository.DeliverRepository;
 import com.algaworks.algalog.domain.service.CreateDeliverService;
@@ -29,24 +29,25 @@ public class DeliverController {
 
 	private CreateDeliverService createDeliver;
 	private DeliverRepository deliverRepository;
+	private DeliverDTOAssembler deliverAssembler;
 	
 	@GetMapping
-	public List<Deliver> getAllDelivers() {
-		return deliverRepository.findAll();
+	public List<DeliverDTO> getAllDelivers() {
+		return deliverAssembler.toDTOList(deliverRepository.findAll());
 		
 	}
 	
 	@GetMapping("/{deliverId}")
-	public ResponseEntity<Deliver> getDeliver(@PathVariable Long deliverId) {
+	public ResponseEntity<DeliverDTO> getDeliver(@PathVariable Long deliverId) {
 		return deliverRepository.findById(deliverId)
-				.map(ResponseEntity::ok)
+				.map(deliver -> ResponseEntity.ok(deliverAssembler.toDTO(deliver)))
 				.orElse(ResponseEntity.notFound().build());
 		
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Deliver create(@Valid @RequestBody Deliver deliver) {
-		return createDeliver.createDemand(deliver);
+	public DeliverDTO create(@Valid @RequestBody Deliver deliver) {
+		return deliverAssembler.toDTO(createDeliver.createDemand(deliver));
 	}
 }
