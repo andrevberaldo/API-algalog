@@ -2,6 +2,8 @@ package com.algaworks.algalog.domain.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -36,6 +39,9 @@ public class Deliver {
 	
 	@ManyToOne
 	private Customer customer;
+	
+	@OneToMany(mappedBy = "deliver")
+	private List<DeliverEvent> events = new ArrayList<>();
 	
 	@Embedded
 	private Recipient recipient;
