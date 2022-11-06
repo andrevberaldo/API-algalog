@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -40,7 +41,7 @@ public class Deliver {
 	@ManyToOne
 	private Customer customer;
 	
-	@OneToMany(mappedBy = "deliver")
+	@OneToMany(mappedBy = "deliver", cascade = CascadeType.ALL)
 	private List<DeliverEvent> events = new ArrayList<>();
 	
 	@Embedded
@@ -57,4 +58,16 @@ public class Deliver {
 	@JsonProperty(access = Access.READ_ONLY)
 	@Column(name = "concluded_at")
 	private OffsetDateTime concludedAt;
+
+	public DeliverEvent addEvent(String description) {
+		DeliverEvent deliverEvent = new DeliverEvent();
+		deliverEvent.setDescription(description);
+		deliverEvent.setDeliver(this);
+		deliverEvent.setEventDateTime(OffsetDateTime.now());
+		
+		this.getEvents().add(deliverEvent);
+		
+		return deliverEvent;
+		
+	}
 }

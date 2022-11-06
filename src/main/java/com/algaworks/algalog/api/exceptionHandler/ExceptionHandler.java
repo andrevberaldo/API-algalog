@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.algaworks.algalog.domain.exception.BusinessException;
+import com.algaworks.algalog.domain.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler{
@@ -46,6 +47,18 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	@org.springframework.web.bind.annotation.ExceptionHandler(BusinessException.class)
 	public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		AlgalogException error = new AlgalogException();
+		error.setStatus(status.value());
+		error.setDatetime(LocalDateTime.now());
+		error.setTitle(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Object> handleBusinessException(ResourceNotFoundException ex, WebRequest request){
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		AlgalogException error = new AlgalogException();
 		error.setStatus(status.value());
