@@ -1,7 +1,7 @@
 # API-algalog
 
 This project was built on the Mergulho Spring Rest bootcamp provided by Algaworks School.
-Main features: Back-end for a logistic system, implementing the best pratices of Rest Api using Spring to do so.
+Main features: Back-end for a logistic system, implementing the best pratices of Rest Api.
 
 Technologies used:
 
