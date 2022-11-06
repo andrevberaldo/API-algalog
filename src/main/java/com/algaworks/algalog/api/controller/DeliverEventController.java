@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.api.assembler.DeliverEventDTOAssembler;
-import com.algaworks.algalog.api.model.DeliverDTO;
 import com.algaworks.algalog.api.model.DeliverEventDTO;
 import com.algaworks.algalog.api.model.input.DeliverEventInputDTO;
-import com.algaworks.algalog.domain.model.Deliver;
 import com.algaworks.algalog.domain.model.DeliverEvent;
 import com.algaworks.algalog.domain.service.RecordDeliverEvent;
 import com.algaworks.algalog.domain.service.SearchDeliverService;

@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.algaworks.algalog.domain.exception.BusinessException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -69,5 +70,18 @@ public class Deliver {
 		
 		return deliverEvent;
 		
+	}
+
+	public void conclude() {
+		if(cannotBeConcluded()) {
+			throw new BusinessException("Deliver cannot be concluded");
+		}
+		
+		this.setStatus(DeliverStatus.CONCLUDED);
+		this.setConcludedAt(OffsetDateTime.now());
+	}
+	
+	public boolean cannotBeConcluded() {
+		return !status.equals(DeliverStatus.PENDING);
 	}
 }
