@@ -247,7 +247,7 @@
 					"response": []
 				},
 				{
-					"name": "Deliver",
+					"name": "Conclude Deliver",
 					"request": {
 						"method": "PUT",
 						"header": [],
