@@ -7,6 +7,6 @@ Technologies used:
 
 - Spring Web
 - Spring Data JPA
-- MySql 5.7 (Using Mysql:5.7 official image from docker hub)
+- MySql 5.7 (Using Mysql:5.7 official image from docker hub, should use: docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7) 
 - Flyway (migrations manager)
 - Lombok
