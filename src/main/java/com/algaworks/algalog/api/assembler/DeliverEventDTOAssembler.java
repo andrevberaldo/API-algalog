@@ -1,5 +1,8 @@
 package com.algaworks.algalog.api.assembler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +19,13 @@ public class DeliverEventDTOAssembler {
 	
 	public DeliverEventDTO toDTO(DeliverEvent deliverEvent) {
 		return modelMapper.map(deliverEvent, DeliverEventDTO.class);
+	}
+	
+	public List<DeliverEventDTO> toDTOList(List<DeliverEvent> deliverEvents){
+		List<DeliverEventDTO> list = new ArrayList<>();		
+		
+		deliverEvents.forEach(event -> list.add(toDTO(event)));
+		
+		return list;
 	}
 }
