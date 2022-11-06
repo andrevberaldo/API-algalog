@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "8c504d09-2437-4543-b5a0-c7de34bf9115",
+		"name": "AlgaLog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "List Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customers/:customerId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Name\",\n\t\"email\": \"customerEmail@host.com\",\n\t\"phone\": \"phoneNumber\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"name\": \"Customer Name\",\n\t\"email\": \"CustomerEmail@host.com\",\n\t\"phone\": \"phone\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/:customerId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"name\": \"giovanna Rosa\",\n\t\"email\": \"gio@hotmail.com\",\n\t\"phone\": \"99999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/:customerId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deliver",
+			"item": [
+				{
+					"name": "Create Deliver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"id\": 1\n    },\n    \"recipient\": {\n        \"name\": \"Recipient Name\",\n        \"address\": \"Recipient address\",\n        \"number\": \"number\",\n        \"cityStateAndZipCode\": \"city state and zipcode\"\n    },\n    \"fee\": 33.43\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/delivers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Record Event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Recipient not home\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/delivers/:deliverId/events",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivers",
+								":deliverId",
+								"events"
+							],
+							"variable": [
+								{
+									"key": "deliverId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Delivers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"id\": 1\n    },\n    \"recipient\": {\n        \"name\": \"Sandra Beraldo\",\n        \"address\": \"r: hydino\",\n        \"number\": \"190\",\n        \"cityStateAndZipCode\": \"indaiatuba-sp 13333-140\"\n    },\n    \"fee\": 33.43\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/delivers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deliver",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"id\": 1\n    },\n    \"recipient\": {\n        \"name\": \"Sandra Beraldo\",\n        \"address\": \"r: hydino\",\n        \"number\": \"190\",\n        \"cityStateAndZipCode\": \"indaiatuba-sp 13333-140\"\n    },\n    \"fee\": 33.43\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/delivers/:deliverId/conclude",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivers",
+								":deliverId",
+								"conclude"
+							],
+							"variable": [
+								{
+									"key": "deliverId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Delivers Events",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"id\": 1\n    },\n    \"recipient\": {\n        \"name\": \"Sandra Beraldo\",\n        \"address\": \"r: hydino\",\n        \"number\": \"190\",\n        \"cityStateAndZipCode\": \"indaiatuba-sp 13333-140\"\n    },\n    \"fee\": 33.43\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/delivers/:deliverId/events",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivers",
+								":deliverId",
+								"events"
+							],
+							"variable": [
+								{
+									"key": "deliverId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:8080/\n",
+			"type": "default",
+			"disabled": true
+		}
+	]
+}
